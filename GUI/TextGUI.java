@@ -30,8 +30,8 @@ public class TextGUI {
         //instantiating stuff
         mainFrame = new JFrame();
         mainPanel = new JPanel();
-        textField = new JTextField();
-        textArea = new JTextArea();
+        textField = new JTextField(10);//instantiatiing with width
+        textArea = new JTextArea(10, 40);// instantiating with width x height
         minSize = new Dimension(640,480);
         scrollPane = new JScrollPane(textArea);//adds the scroll pane to the text area
         gridBagLayout = new GridBagLayout();
@@ -63,6 +63,8 @@ public class TextGUI {
         
         //textArea stuff
         textArea.setEditable(false);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
         
         
         //panel stuff
@@ -74,9 +76,9 @@ public class TextGUI {
         
         //frame stuff
         mainFrame.add(mainPanel);
-        mainFrame.setMinimumSize(minSize);
+        //mainFrame.setMinimumSize(minSize);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //mainFrame.pack();
+        mainFrame.pack();
         mainFrame.getContentPane().setBackground(Color.red);
         mainFrame.setVisible(true);
         mainFrame.setTitle("Text Engine");
