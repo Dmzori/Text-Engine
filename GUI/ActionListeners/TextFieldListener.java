@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
 
-public class TextFieldListener implements ActionListener, KeyListener {
+public class TextFieldListener{
     private JTextField textField;
     private JTextArea textArea;
     
@@ -19,29 +19,18 @@ public class TextFieldListener implements ActionListener, KeyListener {
                              JTextArea textArea){
         this.textField = textField;
         this.textArea = textArea;
-    }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //so on enter this will append the the text from the text field to the text area
-        String currentTextFieldText = textField.getText();
-        textArea.append(currentTextFieldText);
-        textField.setText(" ");
-        
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+    
+    public void doTheThing(JTextField textField, JTextArea textArea){
+        textField.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), textArea);
+        //need an action map for textField and an action that will contain the code to do things in the text area
     }
     
+    /*public void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String currentTextFieldText = textField.getText();
+            textArea.append(currentTextFieldText);
+            textField.setText(" ");
+        }
+    }*/
 }
