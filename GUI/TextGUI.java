@@ -11,7 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import GUI.ActionListeners.TextFieldListener;
+import GUI.ActionListeners.TextFieldAction;
+import javax.swing.KeyStroke;
 
 
 public class TextGUI {
@@ -24,7 +25,7 @@ public class TextGUI {
     private final GridBagConstraints textFieldConstraint;//the size constraint to be used for the gridbaglayout
     private final GridBagConstraints textAreaConstraint;
     private final Dimension minSize;//the min size of the frame
-    private final TextFieldListener  textListener;
+    private final TextFieldAction  textAction;
     //private final int relative;
     
     public TextGUI()
@@ -39,7 +40,7 @@ public class TextGUI {
         gridBagLayout = new GridBagLayout();
         textFieldConstraint = new GridBagConstraints();//each component should have its own constraint size when added to it's panel unless you want them to act the same at all times 
         textAreaConstraint = new GridBagConstraints();
-        textListener = new TextFieldListener(textField,
+        textAction = new TextFieldAction(textField,
                                              textArea);
         //relative = GridBagConstraints.RELATIVE;
         
@@ -65,13 +66,14 @@ public class TextGUI {
         //textField stuff
         textField.setEditable(true);
         textField.setFocusable(true);
-        //textField.getInputMap().put(KeyStroke, mainPanel);
+        textAction.mapSetUp(textField, textArea);
         
         //textArea stuff
         textArea.setEditable(false);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         textArea.requestFocusInWindow();
+        textArea.setBackground(Color.lightGray);
         
         
         //panel stuff
