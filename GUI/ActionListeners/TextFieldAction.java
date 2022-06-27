@@ -30,7 +30,7 @@ public class TextFieldAction extends AbstractAction{
     @Override
     public void actionPerformed(ActionEvent e) {
         String currentTextFieldText = textField.getText();
-            textArea.append(currentTextFieldText + "\n"); // \n forces new text to be placed on a new line
-            textField.setText(" ");
+        textArea.append(currentTextFieldText + "\n"); // \n forces new text to be placed on a new line
+        textField.setText(" ");
     }
 }

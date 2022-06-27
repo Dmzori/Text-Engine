@@ -16,7 +16,7 @@ import javax.swing.KeyStroke;
 
 
 public class TextGUI {
-    private final JFrame mainFrame;//the main frame that holds everything
+   private final JFrame mainFrame;//the main frame that holds everything
     private final JPanel mainPanel;//the panel that sits on the frame and holds everything else
     private final JTextField textField; //this will be where user text is entered
     private final JTextArea textArea;//this will be where old text is appended and responses are lsited
@@ -26,7 +26,7 @@ public class TextGUI {
     private final GridBagConstraints textAreaConstraint;
     private final Dimension minSize;//the min size of the frame
     private final TextFieldAction  textAction;
-    //private final int relative;
+    private final SmartScroller smartScroller;
     
     public TextGUI()
     {
@@ -34,34 +34,40 @@ public class TextGUI {
         mainFrame = new JFrame();
         mainPanel = new JPanel();
         textField = new JTextField(10);//instantiatiing with width
-        textArea = new JTextArea(10, 40);// instantiating with width x height
+        textArea = new JTextArea("Type S to start \n", 10, 40);// instantiating with width x height
         minSize = new Dimension(640,480);
         scrollPane = new JScrollPane(textArea);//adds the scroll pane to the text area
         gridBagLayout = new GridBagLayout();
         textFieldConstraint = new GridBagConstraints();//each component should have its own constraint size when added to it's panel unless you want them to act the same at all times 
         textAreaConstraint = new GridBagConstraints();
-        textAction = new TextFieldAction(textField,
-                                             textArea);
-        //relative = GridBagConstraints.RELATIVE;
-        
+        textAction = new TextFieldAction(textField, textArea);
+        smartScroller = new SmartScroller(scrollPane, SmartScroller.VERTICAL, SmartScroller.END);
 
+        
+        //scrollpane stuff
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+ 
         //textField gridBagConstraint stuff
+        textFieldConstraint.weightx = 1;
+        textFieldConstraint.weighty = 1;
         textFieldConstraint.fill = GridBagConstraints.HORIZONTAL;
         textFieldConstraint.gridx = 0;
         textFieldConstraint.gridy = 0;
-        textFieldConstraint.anchor = GridBagConstraints.FIRST_LINE_START;
+        //textFieldConstraint.anchor = GridBagConstraints.FIRST_LINE_START;
         textFieldConstraint.gridwidth = GridBagConstraints.REMAINDER;
-        textFieldConstraint.gridwidth = 5000;
         textFieldConstraint.insets = new Insets(10, 10, 10, 10);
         
         //textArea gridBagConstraint stuff
-        textAreaConstraint.fill = GridBagConstraints.HORIZONTAL;
         textAreaConstraint.gridx = 0;
-        textAreaConstraint.gridy = GridBagConstraints.RELATIVE;
+        textAreaConstraint.gridy = 1;
         textAreaConstraint.ipady = 40;
-        textAreaConstraint.anchor = GridBagConstraints.LINE_START;
+        textAreaConstraint.weightx = 1;
+        textAreaConstraint.weighty = 1;
+        textAreaConstraint.fill = GridBagConstraints.BOTH;
         textAreaConstraint.gridwidth = GridBagConstraints.REMAINDER;
-        //textAreaConstraint.gridwidth = 5;
+        textAreaConstraint.gridwidth = 5;
         
         //textField stuff
         textField.setEditable(true);
@@ -76,10 +82,12 @@ public class TextGUI {
         textArea.setBackground(Color.lightGray);
         
         
+        
+        
         //panel stuff
         mainPanel.setLayout(gridBagLayout);
+        mainPanel.add(scrollPane, textAreaConstraint);//this holds the text area so the constraints are added here
         mainPanel.add(textField, textFieldConstraint);
-        mainPanel.add(textArea, textAreaConstraint);
         mainPanel.setBackground(Color.BLACK);
         mainPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         
@@ -88,10 +96,9 @@ public class TextGUI {
         //mainFrame.setMinimumSize(minSize);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.pack();
-        mainFrame.getContentPane().setBackground(Color.red);
+        mainFrame.getContentPane().setBackground(Color.GRAY);
         mainFrame.setVisible(true);
-        mainFrame.setTitle("Text Engine");
-        
+        mainFrame.setTitle("Text Engine v1.0");
         
     }
 }
