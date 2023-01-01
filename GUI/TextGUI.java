@@ -34,7 +34,7 @@ public class TextGUI {
         mainFrame = new JFrame();
         mainPanel = new JPanel();
         textField = new JTextField(10);//instantiatiing with width
-        textArea = new JTextArea("Type S to start \n", 10, 40);// instantiating with width x height
+        textArea = new JTextArea("its working \n", 10, 40);// instantiating with width x height
         minSize = new Dimension(640,480);
         scrollPane = new JScrollPane(textArea);//adds the scroll pane to the text area
         gridBagLayout = new GridBagLayout();
