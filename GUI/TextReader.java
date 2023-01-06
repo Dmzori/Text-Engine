@@ -3,6 +3,7 @@ package GUI;
 import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Utilities;
+import MISC.Commands;
 
 public class TextReader {
     private JTextArea textArea;
@@ -24,9 +25,20 @@ public class TextReader {
         while (start == end)
         {
             end--;
-            start = Utilities.getRowStart(textArea, end);
+            start = Utilities.getRowStart(textArea, end-1);
         }
         String text = textArea.getText(start, end);
         return text;
     }
+    
+    public void lastLineOfTextAction(JTextArea textArea) throws BadLocationException
+    {
+        
+        String lastLine = getLastLineOfText(textArea);
+        if(lastLine.equals(Commands.START.toString())){
+           //do start game stuff here
+        }
+    }
+            
+        
 }
