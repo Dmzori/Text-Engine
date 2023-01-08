@@ -25,18 +25,21 @@ public class TextReader {
         while (start == end)
         {
             end--;
-            start = Utilities.getRowStart(textArea, end-1);
+            start = Utilities.getRowStart(textArea, end);
         }
         String text = textArea.getText(start, end);
         return text;
     }
     
-    public void lastLineOfTextAction(JTextArea textArea) throws BadLocationException
+    public void lastLineOfTextAction(JTextArea textArea, int gameState) throws BadLocationException//this is the game this runs the whole show
     {
         
         String lastLine = getLastLineOfText(textArea);
-        if(lastLine.equals(Commands.START.toString())){
+        if(gameState == 0){
+           if(lastLine.equals(Commands.START.toString())){
            //do start game stuff here
+           //generate game under start tag
+           gameState++;}
         }
     }
             
